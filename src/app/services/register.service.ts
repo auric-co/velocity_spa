@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ApiService} from './api.service';
+import {catchError, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
+  private handleError: any;
 
   constructor(private http: HttpClient, private  api: ApiService) { }
 
@@ -55,18 +58,15 @@ export class RegisterService {
       });
   }
 
-  async companies(): Promise<any> {
+  async companies(): Promise<Observable<any>>{
     await this.api.csrf();
 
     return this.http
       .get('/api/v2/spa/company')
-      .toPromise()
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err;
-      });
+      .pipe(
+        map((response: Response) => response),
+        catchError(this.handleError)
+      );
   }
 
   async request_activation_code(email: string): Promise<any> {

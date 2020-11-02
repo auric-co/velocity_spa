@@ -11,16 +11,23 @@ import {AppointmentRequest} from '../../interfaces/appointment-request';
   styleUrls: ['./counselling-requests.component.scss']
 })
 export class CounsellingRequestsComponent implements OnInit {
-  appointment: AppointmentRequest[];
+  requests: AppointmentRequest[];
+  private headers: any;
   constructor(private api: CounsellingService, private fb: FormBuilder, private router: Router,
               private snotifyService: SnotifyService) { }
 
 
   ngOnInit(): void {
     this.api.requests().then((res) => {
-      if (res.success){
-        this.appointment = res.appointments;
-      }
+      res.subscribe((data) => {
+        console.log(data);
+        const keys = data.headers.keys();
+        this.headers = keys.map(key =>
+          `${key}: ${data.headers.get(key)}`);
+
+        this.requests = data.appointments;
+        console.log(this.headers);
+      });
     }).catch((e) => {
       console.log(e);
     });
@@ -29,9 +36,15 @@ export class CounsellingRequestsComponent implements OnInit {
 
   reload(): any{
     this.api.requests().then((res) => {
-      if (res.success){
-        this.appointment = res.appointments;
-      }
+      res.subscribe((data) => {
+        console.log(data);
+        const keys = data.headers.keys();
+        this.headers = keys.map(key =>
+          `${key}: ${data.headers.get(key)}`);
+
+        this.requests = data.appointments;
+        console.log(this.headers);
+      });
     }).catch((e) => {
       console.log(e);
     });

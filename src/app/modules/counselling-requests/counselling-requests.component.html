@@ -3,8 +3,8 @@
 </mat-card>
 <br>
 <mat-card>
-  <div class="content" fxLayout="row wrap" fxLayoutGap="15px grid" *ngIf="appointment.length > 0">
-    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="33%" *ngFor="let x of appointment">
+  <div class="content" fxLayout="row wrap" fxLayoutGap="15px grid" *ngIf="requests.length > 0">
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="33%" *ngFor="let x of requests">
       <mat-card class="mat-elevation-z5">
         <mat-card-header>
           <mat-card-title>Appointment Request</mat-card-title>

@@ -6,6 +6,7 @@ import {SnotifyService} from 'ng-snotify';
 import {AuthService} from '../../../services/auth.service';
 import {RegisterService} from '../../../services/register.service';
 import {ActivateState} from '../../../interfaces/activate-state';
+import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
 
 
 interface Company {
@@ -32,11 +33,9 @@ export class CompanyregisterComponent implements OnInit {
 
   ngOnInit(): any {
     this.reg.companies().then((res) => {
-
-      if (res.ok  !== false){
-        this.companys = res;
-      }
-
+      res.subscribe((data) => {
+        this.companys = data;
+      });
     }).catch((e) => {
       console.log(e);
     });
@@ -91,31 +90,9 @@ export class CompanyregisterComponent implements OnInit {
 
   load_clients(): void{
     this.reg.companies().then((res) => {
-
-      if (res.ok !== false){
-        this.companys = res;
-      }
-
-      if (res.status === 422){
-        this.errors = res.error.error.message;
-      }
-
-      if (res.status === 401){
-        this.snotifyService.error(res.error.error.message, {
-          timeout: 2000,
-          showProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true
-        });
-      }
-
-      if (res.status === 419){
-        this.snotifyService.error('System error. CORS. Please contact Admin');
-      }
-
-      if (res.status === 500){
-        this.snotifyService.error('System error. Cannot connect to service. Please contact admin');
-      }
+      res.subscribe((data) => {
+        this.companys = data;
+      });
     }).catch((e) => {
       console.log(e);
     });

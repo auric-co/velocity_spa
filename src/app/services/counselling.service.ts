@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CounsellingService {
+  private handleError: any;
   constructor(private http: HttpClient, private api: ApiService) {
 
   }
@@ -45,32 +46,30 @@ export class CounsellingService {
       });
   }
 
-  async appointments(): Promise<any> {
+  async appointments(): Promise<Observable<any>> {
     await this.api.csrf();
 
     return this.http
       .get('/api/v2/spa/counselling/appointments')
-      .toPromise()
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err;
-      });
+      .pipe(
+        map((response: Response) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
 
-  async requests(): Promise<any> {
+  async requests(): Promise<Observable<any>> {
     await this.api.csrf();
 
     return this.http
       .get('/api/v2/spa/counselling/requests')
-      .toPromise()
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err;
-      });
+      .pipe(
+        map((response: Response) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
 
 }
