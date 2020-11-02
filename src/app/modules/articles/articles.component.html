@@ -1,0 +1,53 @@
+<div *ngFor="let details of wd">
+  <mat-card *ngIf="details.id === cat">
+    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <span style="height: 250px !important;" class="center">
+          <img src="./../{{details.image}}" class="center" style="width: 100% !important; height: 100% !important;"alt="{{details.title}}">
+        </span>
+      </div>
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <h2 class="center">{{details.title}}</h2>
+        <p matLine>{{details.description}}</p>
+        <mat-list dense>
+          <mat-list-item *ngFor="let act of details.activities">
+            <p matLine><mat-icon class="fs-13">arrow_right</mat-icon> {{act}}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </mat-card>
+</div>
+<br>
+<mat-card>
+  <mat-toolbar-row>
+    <h2>Articles</h2>
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="20px">
+        <li>
+          <button mat-mini-fab  class="m-t-4" (click)="reload()" color="primary"><mat-icon class="icon">refresh</mat-icon></button>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
+  <br>
+  <app-no-results *ngIf="articles.length === 0"></app-no-results>
+  <div class="content" fxLayout="row wrap" fxLayoutGap="15px grid" *ngIf="articles.length > 0">
+    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="33%" *ngFor="let blog of articles">
+      <mat-card *ngIf="blog.category_id === cat">
+        <img mat-card-image style="height: 250px" src="{{blog.image}}" alt="">
+        <mat-card-content style="height: 100px" class="overflow-hidden">
+          <p>
+            {{blog.intro}}
+          </p>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <a mat-button [routerLink]="['/dashboard/articles/read', blog.id]" color="primary">Read More..</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+</mat-card>

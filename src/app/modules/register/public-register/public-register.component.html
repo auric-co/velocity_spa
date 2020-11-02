@@ -1,0 +1,60 @@
+<div class="limiter">
+  <div class="container-register100" style="background-image: url('../../../../assets/images/3444354.jpg');">
+    <div class="wrap-register100">
+      <form class="register100-form" [formGroup]="regForm">
+        <span class="register100-form-logo">
+          <img src="../../../../assets/images/icons/android-chrome-512x512.png" height="100"/>
+        </span>
+        <span class="register100-form-title p-b-34 p-t-27">
+          Register Individually
+        </span>
+
+        <div class="wrap-input100">
+          <input class="input100" required type="email" [class]="{'error': email.invalid && email.touched}" formControlName="email"  placeholder="Email">
+          <mat-error *ngIf="errors.email">{{errors.email[0]}}</mat-error>
+          <mat-error *ngIf="email.invalid && email.touched">{{get_email_error()}}</mat-error>
+        </div>
+
+        <div class="wrap-input100">
+          <input class="input100" required type="password" formControlName="password"  placeholder="Password">
+          <mat-error *ngIf="errors.password">{{errors.password[0]}}</mat-error>
+          <mat-error *ngIf="password.invalid && password.touched">{{get_pd_error()}}</mat-error>
+        </div>
+
+        <div class="wrap-input100">
+          <input class="input100" required type="password" formControlName="confirmPassword"  placeholder="Confirm Password">
+          <mat-error *ngIf="errors.password_confirmation">{{errors.password_confirmation[0]}}</mat-error>
+          <mat-error *ngIf="confirmPassword.invalid && confirmPassword.touched">{{get_cpd_error()}}</mat-error>
+        </div>
+
+        <div class="container-register100-form-btn">
+          <button  mat-raised-button color="primary"  class="rounded-border" [disabled]="!regForm.valid" (click)="register()">
+            Register
+          </button>
+        </div>
+
+        <div class="text-center p-t-20">
+          <p mat-list-item class="txt1">
+            OR
+          </p>
+        </div>
+        <div class="text-center p-t-10 p-b-50">
+          <a class="txt1" style="text-decoration: none;" routerLink ="/register/company">
+            Register by Company
+          </a>
+        </div>
+        <hr>
+        <div class="text-center p-t-5">
+          <p mat-list-item class="txt1">
+            Already have an account?
+          </p>
+        </div>
+        <div class="container-register100-form-btn">
+          <a routerLink="/" style="text-decoration: none;" class="rounded-border" mat-raised-button color="accent">
+            Login
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

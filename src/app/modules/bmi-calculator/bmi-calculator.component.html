@@ -1,0 +1,59 @@
+<mat-card>
+  <h2 class="center">Body Mass Index (BMI)</h2>
+</mat-card>
+<br>
+<mat-card>
+  <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+      <h3 class="center font-weight-bolder text-muted">Calculate</h3>
+      <mat-divider></mat-divider>
+    </div>
+    <div fxFlex="100%" class="m-t-20" fxFlex.xs="100%" fxFlex.sm="100%">
+      <span class="center text-muted">Weight</span>
+      <div class="basic-container center">
+        <mat-slider class="mat-slide-weight" (input)="weightVal($event)" min="30" max="200"></mat-slider>
+      </div>
+      <span class="center"><strong class="fs-30">{{weight}}</strong> <span class="m-l-5 text-muted">kgs</span></span>
+    </div>
+    <br>
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+      <span class="center m-t-40 text-muted">Height</span>
+      <div class="basic-container center">
+        <mat-slider class="mat-slide-height" (input)="heightVal($event)" min="50" max="280"></mat-slider>
+      </div>
+      <span class="center"><strong class="fs-30">{{height}}</strong> <span class="m-l-5 text-muted">cm</span></span>
+    </div>
+    <br>
+    <br>
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+      <div class="basic-container center m-t-20 m-b-15">
+        <button mat-raised-button class="calculate vertical-center" (click)="openDialog()" color="primary">Calculate</button>
+      </div>
+
+    </div>
+  </div>
+</mat-card>
+
+<br>
+<mat-card>
+  <p class="disclaimer font-weight-bold">
+    This BMI calculator is provided for informational purposes only. It should not be construed as medical advice. No representations or warranties are made to the accuracy or completeness of any information given on any of the pages contained within this site. Please consult a medical professional if there are any questions or concerns.
+  </p>
+</mat-card>
+<br>
+
+<mat-card>
+  <h3 class="center font-weight-bold ">Body Mass Index (BMI)</h3>
+  <p class="text-center">
+    Body Mass Index (BMI) is a person’s weight in kilograms divided by the square of height in meters. A high BMI can be an indicator of high body
+    fatness. BMI can be used to screen for weight categories that may lead to health problems but it is not diagnostic of the body fatness or health of
+    an individual.
+  </p>
+  <h3 class="m-t-10 font-weight-bold center">How is BMI used?</h3>
+  <p class="text-center">
+    A high BMI can be an indicator of high body fatness. BMI can be used as a screening tool but is not diagnostic of the body fatness or health of an individual.
+    <br>
+    <br>
+    To determine if a high BMI is a health risk, a healthcare provider would need to perform further assessments. These assessments might include skinfold thickness measurements, evaluations of diet, physical activity,  family history, and other appropriate health screenings.
+  </p>
+</mat-card>

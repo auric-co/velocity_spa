@@ -1,0 +1,90 @@
+<div class="card">
+  <div class="front">
+    <div class="cover"></div>
+    <div class="user">
+      <img class="img-circle" src="{{usr.profile_photo_url}}"/>
+    </div>
+    <div class="content">
+      <mat-toolbar-row>
+        <div class="name">
+          <h2>{{usr.name}}  {{usr.surname}}<br>
+            <span class="small">{{usr.email}}</span>
+          </h2>
+        </div>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+          <ul fxLayout="row" fxLayoutGap="10px">
+            <li>
+              <a mat-raised-button routerLink="/dashboard/update/profile" class="rounded-border edit-profile" color="accent"><mat-icon class="icon">add</mat-icon> Edit Profile</a>
+            </li>
+          </ul>
+        </div>
+      </mat-toolbar-row>
+      <br>
+      <mat-divider></mat-divider>
+      <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="33%" class="bmi-value" fxFlex.xs="33%" fxFlex.sm="33%">
+          <span>{{usr.bmi}}</span><br>
+          <small>BMI</small>
+        </div>
+        <div class="bmi-value" fxFlex="33%" fxFlex.xs="33%" fxFlex.sm="33%">
+          <span>{{usr.height/100}}m</span> <br>
+         <small>Height</small>
+        </div>
+        <div class="bmi-value" fxFlex="33%" fxFlex.xs="33%" fxFlex.sm="33%">
+          <span>{{usr.weight}}kg</span> <br>
+          <small>Weight</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<mat-card>
+  <h3>User Information</h3>
+  <mat-divider></mat-divider>
+  <mat-list>
+    <mat-list-item>
+      <span>
+        Date of Birth <br>
+        {{usr.dob}}
+      </span>
+    </mat-list-item>
+    <br>
+    <mat-list-item>
+      <span>Email
+        <br>
+        {{usr.email}}
+      </span>
+    </mat-list-item>
+    <br>
+    <mat-list-item>
+      <span>
+        Mobile <br>
+        {{usr.msisdn}}
+      </span>
+    </mat-list-item>
+    <br>
+    <mat-list-item>
+      <span>
+        Address
+        <br>
+        {{usr.address_line_1}}
+        <br>
+        {{usr.address_line_2}}
+      </span>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+<br>
+
+<mat-card class="settings">
+  <h3><mat-icon>settings</mat-icon> Settings</h3>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="/dashboard/profile/update-password">
+    <mat-list>
+      <mat-list-item> Change Password </mat-list-item>
+    </mat-list>
+  </a>
+</mat-card>
+<br>

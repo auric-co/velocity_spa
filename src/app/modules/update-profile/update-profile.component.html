@@ -1,0 +1,87 @@
+<mat-card>Update Profile</mat-card>
+<br>
+<mat-card>
+  <form [formGroup]="updateProfile">
+    <div class="content" fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Name</mat-label>
+          <input class="input100" matInput formControlName="name" value="">
+          <mat-error *ngIf="errors.name">{{errors.name[0]}}</mat-error>
+          <mat-error *ngIf="name.invalid && name.touched">{{get_name_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Surname</mat-label>
+          <input class="input100" matInput formControlName="surname" value="">
+          <mat-error *ngIf="errors.surname">{{errors.surname[0]}}</mat-error>
+          <mat-error *ngIf="surname.invalid && surname.touched">{{get_surname_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <mat-form-field appearance="outline" class="w-100">
+          <input matInput [min]="min" [max]="max" [matDatepicker]="picker" formControlName="dob" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="errors.dob">{{errors.dob[0]}}</mat-error>
+          <mat-error *ngIf="dob.invalid && dob.touched">{{get_dob_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Height (cm)</mat-label>
+          <input matInput class="input100" type="number" min="50" max="290" formControlName="height" value="">
+          <mat-error *ngIf="errors.height">{{errors.height[0]}}</mat-error>
+          <mat-error *ngIf="height.invalid && height.touched">{{get_height_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Weight (kgs)</mat-label>
+          <input matInput class="input100" min="20" max="500" type="number" formControlName="weight" value="">
+          <mat-error *ngIf="errors.weight">{{errors.weight[0]}}</mat-error>
+          <mat-error *ngIf="weight.invalid && weight.touched">{{get_weight_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Address Line 1</mat-label>
+          <textarea matInput formControlName="address1">{{address1}}</textarea>
+          <mat-error *ngIf="errors.address_line_1">{{errors.address_line_1[0]}}</mat-error>
+          <mat-error *ngIf="address1.invalid && address1.touched">{{get_address1_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Address Line 2</mat-label>
+          <textarea matInput formControlName="address2">{{address2}}</textarea>
+          <mat-error *ngIf="errors.address_line_2">{{errors.address_line_2[0]}}</mat-error>
+          <mat-error *ngIf="address2.invalid && address2.touched">{{get_address2_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <mat-card-actions align="center">
+      <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+          <a routerLink="/dashboard/profile" mat-raised-button class="cancel" color="warn">
+            Cancel
+          </a>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+          <button  mat-raised-button color="primary" class="submit" [disabled]="!updateProfile.valid" (click)="update()">
+            Save
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+
+  </form>
+</mat-card>

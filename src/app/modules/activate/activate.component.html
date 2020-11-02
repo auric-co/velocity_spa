@@ -1,0 +1,31 @@
+<div class="limiter">
+  <div class="container-register100" style="background-image: url('../../../assets/images/3444354.jpg');">
+    <div class="wrap-register100">
+      <form class="register100-form" [formGroup]="activateForm">
+        <span class="register100-form-logo">
+          <img src="../../../../assets/images/icons/android-chrome-512x512.png" height="100"/>
+        </span>
+        <span class="register100-form-title p-b-34 p-t-27">
+          Activate Account
+        </span>
+
+        <div class="wrap-input100">
+          <input class="input100" required type="number" [class]="{'error': code.invalid && code.touched}" formControlName="code"  placeholder="Activation Code">
+          <mat-error *ngIf="errors.code">{{errors.code[0]}}</mat-error>
+          <mat-error *ngIf="code.invalid && code.touched">{{get_code_error()}}</mat-error>
+        </div>
+
+        <div class="container-register100-form-btn">
+          <button  mat-raised-button color="primary"  class="rounded-border" [disabled]="!activateForm.valid" (click)="activate()">
+            Activate
+          </button>
+        </div>
+        <div class="text-center p-t-30 p-b-50">
+          <a class="txt1" style="text-decoration: none;" routerLink ="/get-code">
+            Request Activation Code?
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<mat-card>Add Mood</mat-card>
+<br>
+<mat-card>
+  <h3 class="center">How are you feeling?</h3>
+  <form [formGroup]="moodForm">
+    <div class="content" fxLayout="row wrap" fxLayoutGap="5px grid">
+      <div fxFlex="25%" fxFlex.sm="100%" fxFlex.xs="100%">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>I'm feeling rather..</mat-label>
+          <mat-select formControlName="sentiment" class="input100">
+            <mat-option *ngFor="let sentiment of sentiments" [value]="sentiment.id">
+              {{sentiment.title}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="errors.sentiment">{{errors.sentiment[0]}}</mat-error>
+          <mat-error *ngIf="sentiment.invalid && sentiment.touched">{{get_sentiment_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+
+      <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Add note</mat-label>
+          <textarea matInput formControlName="comment"></textarea>
+          <mat-error *ngIf="errors.comment">{{errors.comment[0]}}</mat-error>
+          <mat-error *ngIf="comment.invalid && comment.touched">{{get_comment_error()}}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-card-actions align="center">
+      <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+          <button  mat-raised-button routerLink="/dashboard/my-mood" class="cancel" color="warn">
+            Cancel
+          </button>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="50%" fxFlex.sm="50%">
+          <button  mat-raised-button color="primary" class="submit" [disabled]="!moodForm.valid" (click)="submit()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </form>
+</mat-card>

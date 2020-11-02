@@ -1,0 +1,48 @@
+<mat-card><h2><mat-icon class="fs-30">home</mat-icon></h2></mat-card>
+<br>
+<mat-card>
+  <mat-toolbar-row>
+    <h2>Leaderboard</h2> <br>
+    <small matLine>(top 10)</small>
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="20px">
+        <li>
+          <button mat-mini-fab  class="m-t-4" (click)="reload()" color="accent"><mat-icon class="icon">refresh</mat-icon></button>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
+  <br>
+  <app-no-results *ngIf="leaderboard === null"></app-no-results>
+  <mat-list *ngIf="leaderboard !== null">
+    <mat-list-item *ngFor="let ld of sortedLeaderboard; let num = index;">
+      <span matListAvatar>{{num+1}}</span>
+      <h3 matLine> {{ld.name}} {{ld.surname}}</h3>
+      <p matLine>
+        <span> {{ld.email}} </span>
+        <span class="float-r badge badge-dark fs-18 points">{{ld.points}}</span>
+      </p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+<br>
+<mat-card>
+  <h2>Wellness Dimensions</h2>
+  <mat-divider></mat-divider>
+  <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let wd of wd">
+      <a class="" [routerLink]="[wd.path, wd.id]">
+        <mat-card class="mat-elevation-z4" >
+          <img mat-card-image src="./../{{wd.image}}" height="200" alt="">
+          <mat-card-content>
+            <p class="label">
+              <span class="center">{{wd.title}}</span>
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
+  </div>
+</mat-card>

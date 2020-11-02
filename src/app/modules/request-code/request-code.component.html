@@ -1,0 +1,31 @@
+<div class="limiter">
+  <div class="container-register100" style="background-image: url('../../../assets/images/3444354.jpg');">
+    <div class="wrap-register100">
+      <form class="register100-form" [formGroup]="codeForm">
+        <span class="register100-form-logo">
+          <img src="../../../../assets/images/icons/android-chrome-512x512.png" height="100"/>
+        </span>
+        <span class="register100-form-title p-b-34 p-t-27">
+          Request New Code
+        </span>
+
+        <div class="wrap-input100">
+          <input class="input100" required type="email" [class]="{'error': email.invalid && email.touched}" formControlName="email"  placeholder="E,ail address">
+          <mat-error *ngIf="errors.email">{{errors.code[0]}}</mat-error>
+          <mat-error *ngIf="email.invalid && email.touched">{{get_email_error()}}</mat-error>
+        </div>
+
+        <div class="container-register100-form-btn">
+          <button  mat-raised-button color="primary"  class="rounded-border" [disabled]="!codeForm.valid" (click)="request()">
+            Submit
+          </button>
+        </div>
+        <div class="text-center p-t-30 p-b-50">
+          <a class="txt1" style="text-decoration: none;" routerLink ="/activate">
+            Activate Account?
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+ul li {
+  list-style: none;
+}
+
+mat-expansion-panel{
+  margin: 5px;
+}
+
+.label{
+  position: absolute;
+  bottom: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 50px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100% !important;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  background: #248543;
+  opacity: .8;
+}
+.label span{
+  padding-top: 10px;
+}

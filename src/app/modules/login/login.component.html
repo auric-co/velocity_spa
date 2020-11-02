@@ -1,0 +1,51 @@
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('../../../assets/images/3622826.jpg');">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" [formGroup]="loginForm" autocomplete="off">
+        <span class="login100-form-logo">
+          <img src="../../../assets/images/icons/android-chrome-512x512.png" height="100"/>
+        </span>
+        <span class="login100-form-title p-b-34 p-t-27">
+          Sign in
+        </span>
+
+        <div class="wrap-input100">
+          <input class="input100" [class]="{'error': email.invalid && email.touched}"  required type="email" formControlName="email"  placeholder="Email">
+        </div>
+        <mat-error *ngIf="errors.email">{{errors.email[0]}}</mat-error>
+        <mat-error *ngIf="email.invalid && email.touched">{{get_email_error()}}</mat-error>
+
+        <div class="wrap-input100">
+          <input class="input100" [class]="{'error': password.invalid && password.touched}"  required type="password" formControlName="password"  placeholder="Password">
+        </div>
+        <mat-error *ngIf="errors.password">{{errors.password[0]}}</mat-error>
+        <mat-error *ngIf="password.invalid && password.touched">{{get_pd_error()}}</mat-error>
+
+        <div class="container-login100-form-btn">
+          <button [disabled]="!loginForm.valid" class="rounded-border"  mat-raised-button color="primary" (click)="login()">Login</button>
+        </div>
+
+        <div class="text-center p-t-30 p-b-50">
+          <a class="txt1" style="text-decoration: none;" routerLink ="/reset-password">
+            Forgot Password?
+          </a>
+        </div>
+        <hr>
+        <div class="text-center p-t-5">
+          <p class="txt1">
+            Don't have account?
+          </p>
+          <a class="center" target="blank" href="https://play.google.com/store/apps/details?id=za.co.velocityhealth.velocityhealth&utm_source=velocity_wellness"><img src="../../../assets/images/play-store-logo.png" height="100"/></a>
+          <p  class="txt1">
+           OR
+          </p>
+        </div>
+        <div class="container-login100-form-btn">
+          <a routerLink="/register" style="text-decoration: none;" class="rounded-border" color="accent" mat-raised-button>
+            Register
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

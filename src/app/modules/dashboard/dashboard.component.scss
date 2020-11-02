@@ -1,0 +1,48 @@
+.stats-cards {
+  .mat-card {
+    overflow: hidden;
+  }
+}
+
+ul li {
+  list-style: none;
+}
+
+table {
+  width: 100%;
+}
+
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  width: 200px;
+}
+
+
+.label{
+  position: absolute;
+  bottom: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 50px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  width: 100% !important;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  background: #248543;
+  opacity: .8;
+}
+.label span{
+  padding-top: 10px;
+}
+.points{
+  width: 35px;
+  height: 35px;
+  line-height: 28px;
+  border-radius: 50px;
+}

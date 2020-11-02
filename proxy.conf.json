@@ -1,0 +1,7 @@
+{
+  "/api/app": {
+    "target": "http://velocityhealth.co.za/api/app",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

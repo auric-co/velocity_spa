@@ -1,0 +1,11 @@
+<div mat-dialog-content class="basic-container">
+  <p class="center font-weight-bold fs-25 text-muted">Results</p>
+  <span class="result">{{data.result}} <small>kg/m²</small></span>
+  <h2 class="m-t-10">{{bmiresponses[getResponse(data.result)]}}</h2>
+  <p class="m-t-10">Normal weight range for your height is :{{minWeight}}kg - {{maxWeight}}kg'</p>
+</div>
+<br>
+<div mat-dialog-actions>
+  <button mat-raised-button class="btn btn-outline-warning center rounded-border" (click)="tryAgain()">Try again</button>
+  <button mat-raised-button [mat-dialog-close]="data"class="center rounded-border btn-outline-success">Next</button>
+</div>

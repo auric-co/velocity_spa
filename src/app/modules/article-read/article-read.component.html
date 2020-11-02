@@ -1,0 +1,9 @@
+
+<app-four0four *ngIf="article === undefined" class="center-all"></app-four0four>
+
+<mat-card *ngIf="article !== undefined">
+  <img class="center" style="width: 100%!important; height: 250px" src="{{article.image}}" alt="">
+  <br>
+  <mat-card-content [innerHTML]="article.content"></mat-card-content>
+</mat-card>
+

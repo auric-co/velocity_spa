@@ -1,0 +1,36 @@
+<mat-nav-list>
+  <div class="profile-card">
+    <a routerLink="/dashboard/upload/profile">
+      <div class="profile center">
+        <img src="{{usr.profile_photo_url}}" alt="{{usr.name}} ">
+      </div>
+    </a>
+    <a routerLink="/dashboard/profile">
+      <div class="header">
+        <h2>{{usr.name}}  {{usr.surname}} <br>
+          <span class="small">{{usr.email}}</span>
+        </h2>
+      </div>
+    </a>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <a mat-list-item [routerLinkActive]="'list-item-active'" routerLink="/dashboard"><mat-icon>home</mat-icon>Home</a>
+  <a mat-list-item [routerLinkActive]="'list-item-active'" routerLink="/dashboard/bmi"><mat-icon>accessibility</mat-icon>Body Mass Index</a>
+  <a mat-list-item [routerLinkActive]="'list-item-active'" routerLink="/dashboard/counselling"><mat-icon>local_florist</mat-icon>Counselling</a>
+  <a mat-list-item [routerLinkActive]="'list-item-active'" routerLink="/dashboard/my-mood"><mat-icon>sentiment_neutral</mat-icon>Track Mood</a>
+  <mat-divider></mat-divider>
+
+  <h2 matSubheader>Account</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/profile">
+      <mat-icon>settings</mat-icon>
+      Settings
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    Logout
+  </a>
+</mat-nav-list>
