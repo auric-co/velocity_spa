@@ -12,7 +12,7 @@
           <div class="wrap-select100">
             <mat-form-field class="select100">
               <mat-label><mat-icon>business</mat-icon> Select Company</mat-label>
-              <mat-select formControlName="client" [class]="{'error': client.invalid && client.touched}"  required>
+              <mat-select class="input100" formControlName="client" [class]="{'error': client.invalid && client.touched}"  required>
                 <mat-option *ngFor="let company of companys" [value]="company.id">
                   {{company.name}}
                 </mat-option>

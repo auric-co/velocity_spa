@@ -33,7 +33,9 @@ export class CompanyregisterComponent implements OnInit {
   ngOnInit(): any {
     this.reg.companies().then((res) => {
 
-      this.companys = res;
+      if (res.ok  !== false){
+        this.companys = res;
+      }
 
     }).catch((e) => {
       console.log(e);
@@ -89,17 +91,9 @@ export class CompanyregisterComponent implements OnInit {
 
   load_clients(): void{
     this.reg.companies().then((res) => {
-      console.log(res);
-      if (res.success){
-        this.snotifyService.success(res.message, {
-          timeout: 2000,
-          showProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true
-        });
 
+      if (res.ok !== false){
         this.companys = res;
-
       }
 
       if (res.status === 422){
