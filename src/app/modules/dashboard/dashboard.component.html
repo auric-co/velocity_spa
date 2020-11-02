@@ -16,7 +16,7 @@
   <br>
   <app-no-results *ngIf="leaderboard === null"></app-no-results>
   <mat-list *ngIf="leaderboard !== null">
-    <mat-list-item *ngFor="let ld of sortedLeaderboard; let num = index;">
+    <mat-list-item *ngFor="let ld of leaderboard; let num = index;">
       <span matListAvatar>{{num+1}}</span>
       <h3 matLine> {{ld.name}} {{ld.surname}}</h3>
       <p matLine>
