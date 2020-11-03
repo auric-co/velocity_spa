@@ -39,8 +39,8 @@ export class BmiResultComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.minWeight = BmiResultComponent.calculateMinNormalWeight(this.data.result);
-    this.maxWeight = BmiResultComponent.calculateMaxNormalWeight(this.data.result);
+    this.minWeight = Math.round(BmiResultComponent.calculateMinNormalWeight(this.data.result));
+    this.maxWeight = Math.round(BmiResultComponent.calculateMaxNormalWeight(this.data.result));
   }
 
   getResponse(bmi: number): number {

@@ -17,7 +17,7 @@ export class MoodService {
 
     return this.http
       .post(
-        '/api/v2/spa/user/mood/add',
+        '/api/v2/spa/mood/add',
         {
           date,
           sentiment,
@@ -34,4 +34,15 @@ export class MoodService {
       });
   }
 
+
+  async moods(): Promise<Observable<any>> {
+    await this.api.csrf();
+
+    return this.http.get('/api/v2/spa/mood/all')
+      .pipe(
+        map((response: Response) => {
+          return response;
+        })
+      );
+  }
 }

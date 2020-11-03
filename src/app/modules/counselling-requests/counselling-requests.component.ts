@@ -20,11 +20,6 @@ export class CounsellingRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.api.requests().then((res) => {
       res.subscribe((data) => {
-        console.log(data);
-        const keys = data.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${data.headers.get(key)}`);
-
         this.requests = data.appointments;
         console.log(this.headers);
       });
@@ -37,11 +32,6 @@ export class CounsellingRequestsComponent implements OnInit {
   reload(): any{
     this.api.requests().then((res) => {
       res.subscribe((data) => {
-        console.log(data);
-        const keys = data.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${data.headers.get(key)}`);
-
         this.requests = data.appointments;
         console.log(this.headers);
       });

@@ -25,58 +25,9 @@ export class ArticlesComponent implements OnInit {
     });
 
     this.art.article_by_cat(this.cat).then((res) => {
-      this.temp = res.articles;
+      res.subscribe((data) => {
+        this.temp = data.articles;
 
-      if (this.temp !== null){
-        this.temp.forEach(element => {
-          if (element.category_id === this.cat){
-            this.articles.push(element);
-          }
-        });
-      }
-    }).catch((e) => {
-
-    });
-
-  }
-
-
-  reload(): any{
-    this.art.articleall().then((res) => {
-      if (res.status === 422) {
-        this.snotifyService.error('System error. Please contact Admin');
-      }
-
-      if (res.status === 0 || res.status === 404) {
-        this.snotifyService.error('Failed to connect to service. Please contact admin if problem persist');
-      }
-
-      if (res.status === 401){
-        this.snotifyService.error(res.error.message, {
-          timeout: 2000,
-          showProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true
-        });
-      }
-
-      if (res.status === 419){
-        this.snotifyService.error('System error. CORS. Please contact Admin');
-      }
-
-      if (res.status === 500){
-        this.snotifyService.error('System error. Cannot connect to service. Please contact admin');
-      }
-
-      if (res.success){
-        this.snotifyService.success('Articles refreshed successful', {
-          timeout: 2000,
-          showProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true
-        });
-
-        this.temp = res.articles;
         if (this.temp !== null){
           this.temp.forEach(element => {
             if (element.category_id === this.cat){
@@ -84,8 +35,29 @@ export class ArticlesComponent implements OnInit {
             }
           });
         }
-      }
+      });
     }).catch((e) => {
+      console.log(e);
+    });
+
+  }
+
+
+  reload(): any{
+    this.art.article_by_cat(this.cat).then((res) => {
+      res.subscribe((data) => {
+        this.temp = data.articles;
+
+        if (this.temp !== null){
+          this.temp.forEach(element => {
+            if (element.category_id === this.cat){
+              this.articles.push(element);
+            }
+          });
+        }
+      });
+    }).catch((e) => {
+      console.log(e);
       this.snotifyService.error('Something went wrong. Please contact admin');
     });
   }

@@ -12,7 +12,6 @@ import {SnotifyService} from 'ng-snotify';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  private headers: any;
 
   constructor(private ld: LeaderboardService, private api: ApiService, private snotifyService: SnotifyService) {}
   public wd: WellnessDimensions[] = [];
@@ -21,16 +20,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.ld.top_ten().then((res) => {
       res.subscribe((data) => {
-        console.log(data);
-        const keys = data.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${data.headers.get(key)}`);
-
         this.leaderboard = data.leaderboard.sort((a, b) => {
-          if (a.points < b.points) { return -1; }
-          if (a.points > b.points) { return 1; }
+          if (a.points < b.points) { return 1; }
+          if (a.points > b.points) { return -1; }
         });
-        console.log(this.leaderboard);
       });
     }).catch((e) => {
       console.log(e);
@@ -42,16 +35,10 @@ export class DashboardComponent implements OnInit {
   reload(): void{
     this.ld.top_ten().then((res) => {
       res.subscribe((data) => {
-        console.log(data);
-        const keys = data.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${data.headers.get(key)}`);
-
         this.leaderboard = data.leaderboard.sort((a, b) => {
           if (a.points < b.points) { return -1; }
           if (a.points > b.points) { return 1; }
         });
-        console.log(this.leaderboard);
       });
     })
       .catch((error) => {

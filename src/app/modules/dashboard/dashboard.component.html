@@ -14,7 +14,7 @@
   </mat-toolbar-row>
   <mat-divider></mat-divider>
   <br>
-  <app-no-results *ngIf="leaderboard === null"></app-no-results>
+  <app-no-results *ngIf="leaderboard === null || leaderboard.length === 0"></app-no-results>
   <mat-list *ngIf="leaderboard !== null">
     <mat-list-item *ngFor="let ld of leaderboard; let num = index;">
       <span matListAvatar>{{num+1}}</span>

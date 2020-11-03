@@ -20,9 +20,12 @@ export class ArticleReadComponent implements OnInit {
 
     if (this.id !== null){
       this.art.article_by_id(this.id).then((res) => {
-        if (res.success){
-          this.article = res.article;
-        }
+        res.subscribe((data) => {
+          if (data.success){
+            this.article = data.article;
+          }
+        });
+
       }).catch((e) => {
         console.log(e);
       });
