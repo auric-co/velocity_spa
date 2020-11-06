@@ -2,8 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder,  FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {SnotifyService} from 'ng-snotify';
-import {ApiService} from '../../services/api.service';
-import {AuthService} from '../../services/auth.service';
 import {RequestAppointmentErrors} from '../../interfaces/request-appointment-errors';
 import * as _moment from 'moment';
 // @ts-ignore
@@ -46,22 +44,29 @@ export class RequestAppointmentComponent implements OnInit {
     other: '',
   };
 
-  platforms: Platform[] = [
-    {id: 1, title: 'Call'},
-    {id: 2, title: 'Google Meet'},
-    {id: 3, title: 'Zoom'}
-  ];
+  cat: number;
 
-  categories: CounsellingCategory[] = [
-    {id: 1, title: 'Covid-19'},
-    {id: 2, title: 'Stress'},
-    {id: 3, title: 'Marriage'}
-  ];
+  platforms: Platform[];
+
+  categories: CounsellingCategory[];
 
   constructor(private router: Router, private snotifyService: SnotifyService,
               private user: CounsellingService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.platforms = [];
+    this.user.platforms().then((res) => {
+      res.subscribe((data) => {
+        this.platforms = data;
+      });
+    }).catch((e) => console.log(e));
+    this.categories = [];
+    this.user.categories().then((res) => {
+      res.subscribe((data) => {
+        this.categories = data;
+      });
+    }).catch((e) => console.log(e));
+
     this.requestForm = this.fb.group({
       platform: ['', Validators.compose([Validators.required])],
       category: ['', Validators.compose([Validators.required])],
@@ -70,6 +75,7 @@ export class RequestAppointmentComponent implements OnInit {
       contact: [ '', Validators.compose([Validators.required])],
       other: ['', ]
     });
+    this.cat = this.requestForm.value.category;
   }
 
   get platform(): any{return this.requestForm.get('platform'); }
@@ -111,13 +117,17 @@ export class RequestAppointmentComponent implements OnInit {
     }
   }
 
+  selectChangeHandler(event: any): any {
+    // update the ui
+    this.cat = event.target.value;
+  }
 
   submit(): any{
     this.user.request_counselling(this.requestForm.value.category,
       this.requestForm.value.platform, this.requestForm.value.date, this.requestForm.value.time,
       this.requestForm.value.contact,  this.requestForm.value.other)
       .then((res) => {
-
+        console.log(res);
         if (res.success){
           this.snotifyService.success(res.message, {
             timeout: 2000,
@@ -125,7 +135,7 @@ export class RequestAppointmentComponent implements OnInit {
             closeOnClick: false,
             pauseOnHover: true
           });
-          this.router.navigate(['/dashboard/counselling']);
+          this.router.navigate(['/dashboard/counselling/requests']);
         }
 
         if (res.status === 422){
@@ -133,6 +143,15 @@ export class RequestAppointmentComponent implements OnInit {
         }
 
         if (res.status === 401){
+          this.snotifyService.error(res.error.error.message, {
+            timeout: 2000,
+            showProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true
+          });
+        }
+
+        if (res.status === 403){
           this.snotifyService.error(res.error.error.message, {
             timeout: 2000,
             showProgressBar: false,

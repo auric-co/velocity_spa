@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {ApiService} from './api.service';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +30,15 @@ export class AuthService {
       });
   }
 
-  isLoggedIn(): void {
-    this.user = localStorage.getItem('user');
-    if (this.user){
-      this.router.navigate(['/dashboard']);
-    }
+  async isLoggedIn(): Promise<Observable<any>> {
+    await this.api.csrf();
+
+    return this.http.get('/api/v2/spa/isloggedin')
+      .pipe(
+        map((response: Response) => {
+          return response;
+        })
+      );
   }
 
   async logout(): Promise<any> {
@@ -49,6 +55,7 @@ export class AuthService {
       })
       .catch((err) => {
         console.log(err);
+        this.router.navigate(['/login']);
         return err;
       });
   }

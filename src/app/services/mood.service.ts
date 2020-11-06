@@ -17,7 +17,7 @@ export class MoodService {
 
     return this.http
       .post(
-        '/api/v2/spa/mood/add',
+        '/api/v2/spa/track-mood/add',
         {
           date,
           sentiment,
@@ -26,6 +26,7 @@ export class MoodService {
       )
       .toPromise()
       .then((res) => {
+        console.log(res);
         return res;
       })
       .catch((err) => {
@@ -38,7 +39,7 @@ export class MoodService {
   async moods(): Promise<Observable<any>> {
     await this.api.csrf();
 
-    return this.http.get('/api/v2/spa/mood/all')
+    return this.http.get('/api/v2/spa/track-mood/all')
       .pipe(
         map((response: Response) => {
           return response;

@@ -3,6 +3,7 @@
 </mat-card>
 <br>
 <mat-card>
+  <app-no-results *ngIf="requests.length === 0"></app-no-results>
   <div class="content" fxLayout="row wrap" fxLayoutGap="15px grid" *ngIf="requests.length > 0">
     <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="33%" *ngFor="let x of requests">
       <mat-card class="mat-elevation-z5">
@@ -16,8 +17,8 @@
 
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Edit</button>
-          <button mat-button>Cancel</button>
+          <button mat-button disabled></button>
+          <button mat-button disabled>Cancel</button>
         </mat-card-actions>
       </mat-card>
     </div>

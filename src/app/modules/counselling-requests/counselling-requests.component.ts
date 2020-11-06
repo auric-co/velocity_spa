@@ -18,10 +18,12 @@ export class CounsellingRequestsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.requests = [];
     this.api.requests().then((res) => {
       res.subscribe((data) => {
-        this.requests = data.appointments;
-        console.log(this.headers);
+        if (data.requests !== null){
+          this.requests = data.requests;
+        }
       });
     }).catch((e) => {
       console.log(e);
@@ -32,8 +34,7 @@ export class CounsellingRequestsComponent implements OnInit {
   reload(): any{
     this.api.requests().then((res) => {
       res.subscribe((data) => {
-        this.requests = data.appointments;
-        console.log(this.headers);
+        this.requests = data.requests;
       });
     }).catch((e) => {
       console.log(e);

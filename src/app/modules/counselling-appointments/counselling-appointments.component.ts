@@ -15,9 +15,12 @@ export class CounsellingAppointmentsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private api: CounsellingService,  private snotifyService: SnotifyService) { }
 
   ngOnInit(): void {
+    this.appointments = [];
     this.api.appointments().then((res) => {
      res.subscribe((data) => {
-       this.appointments = data.appointments;
+       if (data.appointments !== null){
+         this.appointments = data.appointments;
+       }
      });
     }).then((e) => {
       console.log(e);

@@ -13,21 +13,33 @@ export class CounsellingService {
 
   }
 
-  async categories(): Promise<any> {
+  async categories(): Promise<Observable<any>> {
     await this.api.csrf();
 
     return this.http
       .get(
         '/api/v2/spa/counselling/categories')
-      .toPromise()
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err;
-      });
+      .pipe(
+        map((response: Response) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
 
+  async  platforms(): Promise<Observable<any>> {
+    await this.api.csrf();
+
+    return this.http
+      .get(
+        '/api/v2/spa/counselling/platforms')
+      .pipe(
+        map((response: Response) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
+  }
   async request_counselling(category: string,
                             platform: string, date: string, time: string, contact: string, other?: string,
   ): Promise<any> {

@@ -40,14 +40,26 @@ export class TrackMoodComponent implements OnInit {
     {id: 'very happy', title: 'Very Happy', icon: 'sentiment_very_satisfied'}
   ];
 
-  selectionChanged(item): void {
-    console.log('Selected value: ' + item.value);
-  }
-
   ngOnInit(): void {
     this.moodForm = this.fb.group({
       comment: [ '', ],
       sentiment: [ '', Validators.compose([Validators.required])],
+    });
+  }
+
+  get_icon(sentiment: string): any{
+    this.sentiments.forEach(element => {
+      if (element.id === sentiment){
+        return element.icon;
+      }
+    });
+  }
+
+  get_sentiment_title(sentiment: string): any{
+    this.sentiments.forEach(element => {
+      if (element.id === sentiment){
+        return element.title;
+      }
     });
   }
 

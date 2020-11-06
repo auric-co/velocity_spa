@@ -10,7 +10,7 @@
       <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Choose Category</mat-label>
-          <mat-select formControlName="category" class="input100">
+          <mat-select formControlName="category" class="input100"  (selectionChange)="selectChangeHandler($event)">
             <mat-option *ngFor="let category of categories" [value]="category.id">
               {{category.title}}
             </mat-option>
@@ -19,7 +19,7 @@
           <mat-error *ngIf="category.invalid && category.touched">{{get_category_error()}}</mat-error>
         </mat-form-field>
       </div>
-      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" *ngIf="category === 13">
+      <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="100%" *ngIf="cat === 13">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Please Specify</mat-label>
           <textarea matInput formControlName="other"></textarea>

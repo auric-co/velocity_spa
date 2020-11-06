@@ -12,7 +12,7 @@ import {AuthService} from './services/auth.service';
 export class AppComponent {
   title = 'Velocity Wellness';
 
-  constructor(private snotifyService: SnotifyService, auth: AuthService,){
+  constructor(private snotifyService: SnotifyService, auth: AuthService){
 
   }
 }
