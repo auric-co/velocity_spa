@@ -5,10 +5,11 @@
 <mat-card>
   <app-no-results *ngIf="requests.length === 0"></app-no-results>
   <div class="content" fxLayout="row wrap" fxLayoutGap="15px grid" *ngIf="requests.length > 0">
-    <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="33%" *ngFor="let x of requests">
-      <mat-card class="mat-elevation-z5">
+    <div fxFlex="33%" class="m-t-5" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="33%" *ngFor="let x of requests">
+      <mat-card>
         <mat-card-header>
-          <mat-card-title>Appointment Request</mat-card-title>
+          <mat-card-title class="center">Appointment Request</mat-card-title>
+          <mat-divider></mat-divider>
           <mat-card-subtitle>{{x.date | date}}</mat-card-subtitle>
           <mat-card-subtitle>{{x.time | date:'h:mm a z'}}</mat-card-subtitle>
         </mat-card-header>
@@ -17,7 +18,7 @@
 
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button disabled></button>
+          <button mat-button disabled>Edit</button>
           <button mat-button disabled>Cancel</button>
         </mat-card-actions>
       </mat-card>

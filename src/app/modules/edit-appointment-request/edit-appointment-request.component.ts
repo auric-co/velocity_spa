@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder,  FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {SnotifyService} from 'ng-snotify';
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CounsellingService} from '../../services/counselling.service';
+import {AppointmentRequest} from '../../interfaces/appointment-request';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RequestAppointmentErrors} from '../../interfaces/request-appointment-errors';
+import {SnotifyService} from 'ng-snotify';
 import * as _moment from 'moment';
 // @ts-ignore
 import {default as _rollupMoment} from 'moment';
-import {CounsellingService} from '../../services/counselling.service';
 
 export interface Platform {
   id: any;
@@ -20,20 +21,15 @@ export interface CounsellingCategory {
 
 const moment = _rollupMoment || _moment;
 
-
 @Component({
-  selector: 'app-request-appointment',
-  templateUrl: './request-appointment.component.html',
-  styleUrls: ['./request-appointment.component.scss'],
+  selector: 'app-edit-appointment-request',
+  templateUrl: './edit-appointment-request.component.html',
+  styleUrls: ['./edit-appointment-request.component.scss']
 })
-export class RequestAppointmentComponent implements OnInit {
-  @ViewChild('picker') picker: any;
-  min: Date = new Date();
-  max: Date = new Date(2007, 11, 31);
-  startAt: Date = new Date(1987, 0, 1);
-  startView = 'multi-year';
-
-  selectedValue: string;
+export class EditAppointmentRequestComponent implements OnInit {
+  id: number;
+  requests: AppointmentRequest[];
+  request: AppointmentRequest;
   requestForm: FormGroup;
   errors: RequestAppointmentErrors = {
     date: '',
@@ -49,19 +45,45 @@ export class RequestAppointmentComponent implements OnInit {
   platforms: Platform[];
 
   categories: CounsellingCategory[];
-
-  constructor(private router: Router, private snotifyService: SnotifyService,
-              private user: CounsellingService, private fb: FormBuilder) {}
+  constructor(private route: ActivatedRoute, private api: CounsellingService,
+              private router: Router, private snotifyService: SnotifyService,
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.requests = [];
+    this.route.params.subscribe((params) => {
+      this.id = Number(params.id);
+    });
+
+    if (this.id !== null) {
+      this.api.requests().then((res) => {
+        res.subscribe((data) => {
+          if (data.success){
+            this.requests = data.requests;
+            if (this.requests.length !== 0){
+              this.requests.forEach(element => {
+                if (element.id === this.id){
+                  this.request = element;
+                }
+              });
+            }
+          }
+        });
+
+      }).catch((e) => {
+        console.log(e);
+      });
+
+    }
+
     this.platforms = [];
-    this.user.platforms().then((res) => {
+    this.api.platforms().then((res) => {
       res.subscribe((data) => {
         this.platforms = data;
       });
     }).catch((e) => console.log(e));
     this.categories = [];
-    this.user.categories().then((res) => {
+    this.api.categories().then((res) => {
       res.subscribe((data) => {
         this.categories = data;
       });
@@ -75,7 +97,6 @@ export class RequestAppointmentComponent implements OnInit {
       contact: [ '', Validators.compose([Validators.required])],
       other: ['',  Validators.compose([Validators.minLength(5), Validators.maxLength(100)])]
     });
-
     this.requestForm.get('category').valueChanges.subscribe((value) => {
       console.log(value);
     });
@@ -126,7 +147,7 @@ export class RequestAppointmentComponent implements OnInit {
   }
 
   submit(): any{
-    this.user.request_counselling(this.requestForm.value.category,
+    this.api.request_counselling(this.requestForm.value.category,
       this.requestForm.value.platform, this.requestForm.value.date, this.requestForm.value.time,
       this.requestForm.value.contact,  this.requestForm.value.other)
       .then((res) => {
@@ -170,10 +191,9 @@ export class RequestAppointmentComponent implements OnInit {
         if (res.status === 500){
           this.snotifyService.error('System error. Cannot connect to service. Please contact admin');
         }
-    }).catch((e) => {
+      }).catch((e) => {
       console.log(e);
       this.snotifyService.error('Fatal Error. Please contact admin');
     });
   }
-
 }

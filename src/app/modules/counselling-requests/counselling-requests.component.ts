@@ -12,7 +12,6 @@ import {AppointmentRequest} from '../../interfaces/appointment-request';
 })
 export class CounsellingRequestsComponent implements OnInit {
   requests: AppointmentRequest[];
-  private headers: any;
   constructor(private api: CounsellingService, private fb: FormBuilder, private router: Router,
               private snotifyService: SnotifyService) { }
 

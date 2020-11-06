@@ -25,6 +25,7 @@ import {CounsellingAppointmentsComponent} from './modules/counselling-appointmen
 import {CounsellingRequestsComponent} from './modules/counselling-requests/counselling-requests.component';
 import { UpdatePasswordComponent } from './modules/update-password/update-password.component';
 import {ArticleReadComponent} from './modules/article-read/article-read.component';
+import {EditAppointmentRequestComponent} from './modules/edit-appointment-request/edit-appointment-request.component';
 
 
 
@@ -102,6 +103,10 @@ const routes: Routes = [
       {
         path: 'appointment-request',
         component: RequestAppointmentComponent,
+      },
+      {
+        path: 'appointment-request/edit/:id',
+        component: EditAppointmentRequestComponent
       },
       {
         path: 'my-mood',
