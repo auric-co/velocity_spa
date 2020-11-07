@@ -7,6 +7,8 @@ import {UserQuery} from '../../../user/state/user.query';
 import {UserService} from '../../../user/state/user.service';
 import {UserStore} from '../../../user/state/user.store';
 import {User} from '../../../user/state/user.model';
+import {MatDialog} from '@angular/material/dialog';
+import {UploadProfileComponent} from '../../../modals/upload-profile/upload-profile.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +19,7 @@ export class SidebarComponent implements OnInit {
 
   constructor(private router: Router, private snotifyService: SnotifyService, private userService: UserService,
               private userQuery: UserQuery, private userStore: UserStore, private api: ApiService,
-              private auth: AuthService) {
+              private auth: AuthService, public dialog: MatDialog) {
   }
 
   public profile = this.userQuery.selectAll();
@@ -37,6 +39,18 @@ export class SidebarComponent implements OnInit {
     this.getUser();
   }
 
+  openDialog(): void {
+
+    const dialogRef = this.dialog.open(UploadProfileComponent, {
+      width: '80%',
+      height: '95%',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(async data => {
+
+    });
+  }
 
   logout(): any{
    return this.auth.logout();

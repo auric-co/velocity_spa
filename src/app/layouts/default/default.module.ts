@@ -58,6 +58,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {UpdatePasswordComponent} from 'src/app/modules/update-password/update-password.component';
 import {ArticleReadComponent} from '../../modules/article-read/article-read.component';
 import {EditAppointmentRequestComponent} from '../../modules/edit-appointment-request/edit-appointment-request.component';
+import {UploadProfileComponent} from '../../modals/upload-profile/upload-profile.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import {EditAppointmentRequestComponent} from '../../modules/edit-appointment-re
     CounsellingAppointmentsComponent,
     CounsellingRequestsComponent,
     UpdatePasswordComponent,
+    UploadProfileComponent
   ],
   imports: [
     CommonModule,

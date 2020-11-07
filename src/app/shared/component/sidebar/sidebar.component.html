@@ -1,8 +1,8 @@
 <mat-nav-list>
   <div class="profile-card">
-    <a routerLink="/dashboard/upload/profile">
+    <a (click)="openDialog()">
       <div class="profile center">
-        <img src="{{usr.profile_photo_url}}" alt="{{usr.name}} ">
+        <img src="{{usr.profile_photo_url}}" alt="{{usr.name}} " >
       </div>
     </a>
     <a routerLink="/dashboard/profile">

@@ -92,10 +92,10 @@ export class EditAppointmentRequestComponent implements OnInit {
     this.requestForm = this.fb.group({
       platform: ['', Validators.compose([Validators.required])],
       category: ['', Validators.compose([Validators.required])],
-      date: [moment(), Validators.compose([Validators.required])],
-      time: ['', Validators.compose([Validators.required])],
-      contact: [ '', Validators.compose([Validators.required])],
-      other: ['',  Validators.compose([Validators.minLength(5), Validators.maxLength(100)])]
+      date: [this.request.date, Validators.compose([Validators.required])],
+      time: [this.request.time, Validators.compose([Validators.required])],
+      contact: [ this.request.contact, Validators.compose([Validators.required])],
+      other: [this.request.other_category_details,  Validators.compose([Validators.minLength(5), Validators.maxLength(100)])]
     });
     this.requestForm.get('category').valueChanges.subscribe((value) => {
       console.log(value);
