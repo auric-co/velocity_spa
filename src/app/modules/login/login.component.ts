@@ -29,6 +29,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): any {
+    // could make use of a guard
+    if (localStorage.getItem('user')){
+      this.router.navigate(['/dashboard']);
+    }
+
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])]

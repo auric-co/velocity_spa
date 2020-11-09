@@ -26,6 +26,7 @@ import {CounsellingRequestsComponent} from './modules/counselling-requests/couns
 import { UpdatePasswordComponent } from './modules/update-password/update-password.component';
 import {ArticleReadComponent} from './modules/article-read/article-read.component';
 import {EditAppointmentRequestComponent} from './modules/edit-appointment-request/edit-appointment-request.component';
+import {LoginGuard} from './_guards/login.guard';
 
 
 
@@ -38,6 +39,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'register/company',
