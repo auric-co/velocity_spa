@@ -20,7 +20,7 @@
           <span id="file-label" class="m-t-20">
             <span class="m-r-5 fs-18">{{file.data.name}}</span> <br>
             <span class="center m-t-10">
-              <a title="Retry" class="" (click)="retryFile(file)" *ngIf="file.canRetry">
+              <a title="Retry" class="m-t-10" (click)="retryFile(file)" *ngIf="file.canRetry">
             <mat-icon class="fs-30" color="primary">refresh</mat-icon></a>
             <a title="Cancel" class="" (click)="cancelFile(file)" *ngIf="file.canCancel">
             <mat-icon class="fs-30" color="warn">cancel</mat-icon></a>

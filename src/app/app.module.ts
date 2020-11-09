@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { UploadProfileComponent } from './modals/upload-profile/upload-profile.component';
+import {CachingInterceptor} from './services/cache/caching-interceptor.service';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { UploadProfileComponent } from './modals/upload-profile/upload-profile.c
       useClass: APIInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override', hasBackdrop: true}},
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
