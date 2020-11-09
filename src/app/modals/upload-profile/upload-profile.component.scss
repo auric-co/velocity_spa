@@ -1,0 +1,51 @@
+:host {
+  ul li {
+    list-style: none;
+  }
+  .mat-icon {
+    vertical-align: middle;
+  }
+  .lnr{
+    margin-right: 10px !important;
+  }
+  .close{
+    position: absolute;
+    top: 3%;
+    right: 3%;
+  }
+  .profile-card {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    .profile{
+      background: #9fcdff;
+      height: 210px;
+      width: 210px;
+      border-radius: 50%;
+      margin: 0 auto;
+      border: 1px solid #FFFFFF;
+    }
+    img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    a{
+      text-decoration: none;
+    }
+  }
+}
+.img-circle{
+  border-radius: 50%;
+}
+
+
+.mat-icon {
+  vertical-align: middle !important;
+}
+.icon-text {
+  display: flex;
+  align-items: center;
+}

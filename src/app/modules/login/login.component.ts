@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
        });
        // create state
        localStorage.setItem('user', JSON.stringify(res.user));
+       localStorage.setItem('token', JSON.stringify(res.token));
        if (act !== null){
          if (act.completed){
            this.router.navigate(['/dashboard/update/profile']);

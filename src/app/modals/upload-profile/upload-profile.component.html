@@ -1,20 +1,38 @@
-<button mat-button color="warn" (click)="onClick()">
-  <mat-icon>file_upload</mat-icon>
-  {{text}}
-</button>
-<br/>
-<ul>
-  <li *ngFor="let file of files" [@fadeInOut]="file.state">
-    <mat-progress-bar [value]="file.progress"></mat-progress-bar>
-    <span id="file-label">
-            {{file.data.name}}
-      <a title="Retry" (click)="retryFile(file)" *ngIf="file.canRetry">
-            <mat-icon>refresh</mat-icon></a>
-            <a title="Cancel" (click)="cancelFile(file)" *ngIf="file.canCancel">
-            <mat-icon>cancel</mat-icon></a>
+<div mat-dialog-content>
+  <mat-card class="mat-elevation-z4" style="max-height: 380px">
+    <img mat-card-image class="cover" src="../../../assets/images/profile.jpg" style="height: fit-content !important;" alt="">
+    <button mat-mini-fab color="warn" (click)="close()" class="close"><mat-icon>close</mat-icon></button>
+    <div class="profile-card">
+      <span class="profile">
+          <img class="img-circle" src="{{data.data.profile_photo_url}}" alt="profile"/>
+      </span>
+    </div>
+  </mat-card>
+  <br>
+  <mat-card>
+    <div class="center">
+      <button mat-icon-button class="" color="primary" (click)="onClick()">
+        <mat-icon class="fs-50">camera_alt</mat-icon>
+      </button>
+      <ul class="center">
+        <li *ngFor="let file of files" [@fadeInOut]="file.state">
+          <mat-progress-bar class="m-b-15 w-100" [value]="file.progress"></mat-progress-bar>
+          <span id="file-label" class="m-t-20">
+            <span class="m-r-5 fs-18">{{file.data.name}}</span> <br>
+            <span class="center m-t-10">
+              <a title="Retry" class="" (click)="retryFile(file)" *ngIf="file.canRetry">
+            <mat-icon class="fs-30" color="primary">refresh</mat-icon></a>
+            <a title="Cancel" class="" (click)="cancelFile(file)" *ngIf="file.canCancel">
+            <mat-icon class="fs-30" color="warn">cancel</mat-icon></a>
             </span>
-  </li>
-</ul>
-<input type="file" id="fileUpload" name="fileUpload" multiple="multiple"
+          </span>
+        </li>
+      </ul>
+      <input type="file" id="fileUpload" name="fileUpload" multiple="multiple" accept="{{accept}}" style="display:none;"/>
 
-       accept="{{accept}}" style="display:none;"/>
+    </div>
+  </mat-card>
+</div>
+
+
+

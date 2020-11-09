@@ -62,7 +62,7 @@ export class BmiCalculatorComponent implements OnInit {
     this.result = this.calculateMetric().toFixed(1) as unknown as number;
     const dialogRef = this.dialog.open(BmiResultComponent, {
       width: '80%',
-      height: '95%',
+      height: '75%',
       data: {height: this.height, weight: this.weight, result: this.result}
     });
 

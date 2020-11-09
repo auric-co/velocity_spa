@@ -42,13 +42,13 @@ export class SidebarComponent implements OnInit {
   openDialog(): void {
 
     const dialogRef = this.dialog.open(UploadProfileComponent, {
-      width: '80%',
-      height: '95%',
-      data: {}
+      width: '400',
+      height: '90%',
+      data: {data: this.usr}
     });
 
     dialogRef.afterClosed().subscribe(async data => {
-
+      console.log(data);
     });
   }
 

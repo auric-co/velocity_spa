@@ -1,12 +1,21 @@
-<div mat-dialog-content class="basic-container">
+<div mat-dialog-content class="basic-container result-card">
   <p class="center font-weight-bold fs-25 text-muted">Results</p>
   <hr>
-  <p class="result">{{data.result}} <span class="fs-14">kg/m²</span></p>
-  <h2 class="m-t-10 center">{{bmiresponses[getResponse(data.result)]}}</h2>
-  <p class="m-t-10 fs-18 center">Normal weight range for your height is :{{minWeight}}kg - {{maxWeight}}kg</p>
+  <div class="container m-t-10">
+    <div class="row">
+      <p class="result m-t-50">{{data.result}} <br><br><small matLine class="fs-20 m-t-10 float-r">kg/m²</small></p>
+    </div>
+  </div>
+  <br>
+  <p class="result-comment center">{{bmiresponses[getResponse(data.result)]}}</p>
+
 </div>
 <br>
-<div mat-dialog-actions>
+<br>
+<p class="fs-15 center">Normal weight range for your height is </p>
+<strong class="fs-15 center">{{minWeight}}kg - {{maxWeight}}kg </strong>
+<br>
+<div mat-dialog-actions class="center">
   <button mat-raised-button class="btn btn-outline-warning center rounded-border" (click)="tryAgain()">Try again</button>
-  <button mat-raised-button [mat-dialog-close]="data"class="center rounded-border btn-outline-success">Next</button>
+  <button mat-raised-button [mat-dialog-close]="data" class="center rounded-border btn-outline-success">Save</button>
 </div>

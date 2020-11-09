@@ -46,6 +46,7 @@ export class AuthService {
 
     this.user = null;
     localStorage.removeItem('user');
+    localStorage.removeItem('leaderboard');
     return this.http
       .post('/api/v2/spa/logout', {})
       .toPromise()
