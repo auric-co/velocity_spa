@@ -2,7 +2,7 @@
   <div class="profile-card">
     <a (click)="openDialog()">
       <div class="profile center">
-        <img src="{{usr.profile_photo_url}}" alt="{{usr.name}} " >
+        <img src="{{usr.profile? 'http://system.velocityhealth.co.za' +usr.profile : usr.profile_photo_url}}" alt="{{usr.name}} " >
       </div>
     </a>
     <a routerLink="/dashboard/profile">

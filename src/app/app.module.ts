@@ -23,8 +23,8 @@ import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { environment } from '../environments/environment';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
-import { UploadProfileComponent } from './modals/upload-profile/upload-profile.component';
 import {CachingInterceptor} from './services/cache/caching-interceptor.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -47,6 +47,7 @@ import {CachingInterceptor} from './services/cache/caching-interceptor.service';
     MatDialogModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {

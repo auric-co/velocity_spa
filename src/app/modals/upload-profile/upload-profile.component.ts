@@ -88,10 +88,9 @@ export class UploadProfileComponent implements OnInit {
             return event;
         }
       }),
-      tap(message => { console.log(message); }),
+      tap(message => {}),
       last(),
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
         file.inProgress = false;
         file.canRetry = true;
         return of(`${file.data.name} upload failed.`);
@@ -102,6 +101,7 @@ export class UploadProfileComponent implements OnInit {
           this.removeFileFromArray(file);
           this.complete.emit(event.body);
         }
+        //
       }
     );
   }
