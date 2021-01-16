@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {catchError, map} from 'rxjs/operators';
 import {ApiService} from './api.service';
@@ -9,14 +9,22 @@ import {Observable} from 'rxjs';
 })
 export class ArticlesService {
   private handleError: any;
+  private httpOptions: { headers: HttpHeaders };
   constructor(private http: HttpClient, private api: ApiService) {
+    const token = localStorage.getItem('token');
 
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
   }
 
   async articlecategories(): Promise<Observable<any>> {
     await this.api.csrf();
     return this.http
-      .get('/api/v2/spa/articles/categories')
+      .get('/api/v2/spa/articles/categories', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -28,7 +36,7 @@ export class ArticlesService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/articles/by/category/' + cat)
+      .get('/api/v2/spa/articles/by/category/' + cat, {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -41,7 +49,7 @@ export class ArticlesService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/articles/' + id + '/details')
+      .get('/api/v2/spa/articles/' + id + '/details', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -54,7 +62,7 @@ export class ArticlesService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/articles/all')
+      .get('/api/v2/spa/articles/all', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;

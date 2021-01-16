@@ -4,7 +4,7 @@
     <button mat-mini-fab color="warn" (click)="close()" class="close"><mat-icon>close</mat-icon></button>
     <div class="profile-card">
       <span class="profile">
-          <img class="img-circle" src="{{data.data.profile_photo_url}}" alt="profile"/>
+          <img class="img-circle" src="{{data.data.profile ? 'http://system.velocityhealth.co.za' + data.data.profile : '../../../assets/images/profile-avatar.png'}}" alt="profile"/>
       </span>
     </div>
   </mat-card>

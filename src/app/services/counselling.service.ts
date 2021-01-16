@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import {catchError, map} from 'rxjs/operators';
@@ -9,8 +9,16 @@ import {ApiService} from './api.service';
 })
 export class CounsellingService {
   private handleError: any;
+  private httpOptions: { headers: HttpHeaders };
   constructor(private http: HttpClient, private api: ApiService) {
+    const token = localStorage.getItem('token');
 
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
   }
 
   async categories(): Promise<Observable<any>> {
@@ -18,7 +26,7 @@ export class CounsellingService {
 
     return this.http
       .get(
-        '/api/v2/spa/counselling/categories')
+        '/api/v2/spa/counselling/categories', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -32,7 +40,7 @@ export class CounsellingService {
 
     return this.http
       .get(
-        '/api/v2/spa/counselling/platforms')
+        '/api/v2/spa/counselling/platforms', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -47,7 +55,7 @@ export class CounsellingService {
     return this.http
       .post(
         '/api/v2/spa/counselling/request/appointment',
-        {category, platform, date, time, contact, other})
+        {category, platform, date, time, contact, other}, {headers: this.httpOptions.headers})
       .toPromise()
       .then((res) => {
         return res;
@@ -62,7 +70,7 @@ export class CounsellingService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/counselling/appointments')
+      .get('/api/v2/spa/counselling/appointments', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -75,7 +83,7 @@ export class CounsellingService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/counselling/requests')
+      .get('/api/v2/spa/counselling/requests', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;

@@ -33,7 +33,7 @@ export class AuthService {
   async isLoggedIn(): Promise<Observable<any>> {
     await this.api.csrf();
 
-    return this.http.get('/api/v2/spa/isloggedin')
+    return this.http.get('/api/v2/spa/auth_check')
       .pipe(
         map((response: Response) => {
           return response;
@@ -47,6 +47,7 @@ export class AuthService {
     this.user = null;
     localStorage.removeItem('user');
     localStorage.removeItem('leaderboard');
+    localStorage.removeItem('token');
     return this.http
       .post('/api/v2/spa/logout', {})
       .toPromise()

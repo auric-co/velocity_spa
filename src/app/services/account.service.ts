@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -11,8 +11,18 @@ import {AuthService} from './auth.service';
 })
 export class AccountService {
   private user: string;
+  private httpOptions: { headers: HttpHeaders };
 
-  constructor(private http: HttpClient, private router: Router, private api: ApiService, private auth: AuthService) {}
+  constructor(private http: HttpClient, private router: Router, private api: ApiService, private auth: AuthService) {
+    const token = localStorage.getItem('token');
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
+  }
 
   async change_password(
     password: string,
@@ -28,7 +38,7 @@ export class AccountService {
           password,
           newpassword,
           newpassword_confirmation: confirmpassword,
-        }
+        }, {headers: this.httpOptions.headers}
       )
       .toPromise()
       .then((res) => {
@@ -43,7 +53,7 @@ export class AccountService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/profile/details')
+      .get('/api/v2/spa/profile/details', {headers: this.httpOptions.headers})
       .toPromise()
       .then((res) => {
         return res;
@@ -75,7 +85,7 @@ export class AccountService {
           weight,
           address_line_1 : addressline1,
           address_line_2 : addressline2,
-        })
+        }, {headers: this.httpOptions.headers})
       .toPromise()
       .then((res) => {
         return res;
@@ -114,7 +124,7 @@ export class AccountService {
         '/api/v2/spa/profile/upload',
         {
           photo: file
-        })
+        }, {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;

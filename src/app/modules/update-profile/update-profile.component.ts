@@ -64,12 +64,12 @@ export class UpdateProfileComponent implements OnInit {
     }
   }
   get_address1_error(): any{
-    if (this.name.hasError('required')) {
+    if (this.address1.hasError('required')) {
       return 'Address is required';
     }
   }
   get_address2_error(): any{
-    if (this.name.hasError('required')) {
+    if (this.address2.hasError('required')) {
       return 'Address is required';
     }
   }

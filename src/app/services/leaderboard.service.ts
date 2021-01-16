@@ -25,7 +25,7 @@ export class LeaderboardService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/leaderboard', {headers: this.httpOptions})
+      .get('/api/v2/spa/leaderboard', {headers: this.httpOptions.headers})
       .pipe(
         map((response: Response) => {
           return response;
@@ -38,7 +38,7 @@ export class LeaderboardService {
     await this.api.csrf();
 
     return this.http
-      .get('/api/v2/spa/user/profile/leaderboard/all', {headers: this.httpOptions})
+      .get('/api/v2/spa/user/profile/leaderboard/all', {headers: this.httpOptions.headers})
       .toPromise()
       .then((res) => {
         return res;

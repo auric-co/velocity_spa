@@ -2,7 +2,7 @@
   <div class="front">
     <div class="cover"></div>
     <div class="user">
-      <img class="img-circle" src="{{usr.profile_photo_url}}"/>
+      <img class="img-circle" src="{{usr.profile ? 'http://system.velocityhealth.co.za' + usr.profile : '../../../assets/images/profile-avatar.png'}}"/>
     </div>
     <div class="content">
       <mat-toolbar-row>

@@ -11,9 +11,9 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit(): any { }
 
-  toggleSideBar() {
+  toggleSideBar(): any {
     this.toggleSideBarForMe.emit();
     setTimeout(() => {
       window.dispatchEvent(

@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.ld.top_ten().then((res) => {
       res.subscribe((data) => {
+        console.log(data);
         this.leaderboard = data.leaderboard.sort((a, b) => {
           if (a.points < b.points) { return 1; }
           if (a.points > b.points) { return -1; }
